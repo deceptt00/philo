@@ -3,12 +3,9 @@
 int init_data(t_data *data)
 {
     int i;
-    
     data->philos = malloc(sizeof(t_philo) * data->num_philos);
     if (!data->philos)
-    {
         return (1);
-    }
     data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
     if (!data->forks)
     {
@@ -36,13 +33,13 @@ void cleanup_data(t_data *data)
     while (i < data->num_philos)
     {
         pthread_mutex_destroy(&data->forks[i]);
+        pthread_mutex_destroy(&data->philos[i].meal_mutex);
         i++;
     }
     pthread_mutex_destroy(&data->print_mutex);
     pthread_mutex_destroy(&data->monitor_mutex);
     free(data->forks);
     free(data->philos);
-    printf("Cleanup completed.\n");
 }
 
 int main(int ac, char **av)

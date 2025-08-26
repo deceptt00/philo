@@ -14,6 +14,7 @@ typedef struct s_philo
     long            last_meal_time;
     pthread_t       thread;
     struct s_data   *data;
+    pthread_mutex_t meal_mutex;
 }               t_philo;
 
 typedef struct s_data
@@ -37,13 +38,15 @@ typedef struct s_data
 long    current_timestamp(void);
 void    precise_sleep(long duration);
 int     ft_atoi(const char *str);
+int     max(int a, int b);
+
 
 // parsing.c
 int     parse_arguments(int ac, char **av, t_data *data);
 
 // actions.c
 void    print_action(t_philo *philo, const char *action);
-void    take_forks(t_philo *philo);
+void    take_forks(t_philo *philo, int right, int left);
 void    eating(t_philo *philo);
 void    sleeping(t_philo *philo);
 void    thinking(t_philo *philo);

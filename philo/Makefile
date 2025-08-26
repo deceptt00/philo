@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
 LIB = -lpthread
 SRC = main.c utils.c parsing.c actions.c simulation.c
 OBJ = $(SRC:.c=.o)

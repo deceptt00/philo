@@ -16,13 +16,21 @@ long current_timestamp(void)
     return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void precise_sleep(long duration)
+void precise_sleep(long time)
 {
-    long start_time;
-    
-    start_time = current_timestamp();
-    while ((current_timestamp() - start_time) < duration)
-        usleep(100);
+	long	start;
+	long	now;
+	long	diff;
+
+	start = current_timestamp();
+	now = start;
+	diff = 0;
+	while (diff < time)
+	{
+		usleep(100);
+		now = current_timestamp();
+		diff = now - start;
+	}
 }
 
 int ft_atoi(const char *str)
